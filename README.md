@@ -2,7 +2,7 @@
 
 # リンク一覧
 ## [httpヘッダについて](./01_web_basic/01_http_header.md)
-
+## [curlとpostmanに慣れる](./01_web_basic/02_curl_postman.md)
 
 
 
