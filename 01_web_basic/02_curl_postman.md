@@ -31,6 +31,13 @@ curl -I http://www.google.com をした場合に返ってこないパラメー�
 また前者2つで返ってきた処理は何を行った結果でしょうか。
 
 # クイズ2
+https://www.googleapis.com/plus/v1/people/me/openIdConnect<br>
+上記はgoogle APIのURLです。<br>
+こちらにpostmanからgetアクセスするとエラーのレスポンスが返ってきます。<br>
+
+・上記レスポンスのエラーの意味<br>
+・またエラーではなく正常にアクセスするために必要な情報の種類<br>
+・それをpostmanのツール上で設定する箇所の名前（タブ名など）はどこになるでしょうか。<br>
 
 
 参考
