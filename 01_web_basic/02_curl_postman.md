@@ -42,3 +42,22 @@ https://www.googleapis.com/plus/v1/people/me/openIdConnect<br>
 
 参考
 https://www.xlsoft.com/jp/blog/blog/2017/06/23/post-1638/
+
+
+//shintaniさん
+## クイズ
+
+[Q1] curlで`https://jsonplaceholder.typicode.com/todos`を叩いて取得した結果をローカルのテキストファイルに保存してください。
+
+ curl https://jsonplaceholder.typicode.com/todos -o test.js 
+
+ で今いる場所に test.jsというファイルで取得できました！
+
+[Q2] curlで`https://httpbin.org`を叩いてレスポンスタイムを表示してください。
+
+curl https://httpbin.org -o /dev/null -w "response_time:%{time_total}\n" 2> /dev/null -s
+
+-o /dev/null でボディを省略できます。
+
+
+[Q3] Postmanで環境変数を設定して`https://httpbin.org`を変数に置き換えてリクエストを送信してください。(送信できたらOK)
