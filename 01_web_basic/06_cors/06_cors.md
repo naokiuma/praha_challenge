@@ -82,6 +82,12 @@ xhr.withCredentials = true;
 設定方法
 
 
+## curlでプリフライトリクエスト
+下記で実践。（最初のurlは送信元、最後のurlは送信先）
+
+
+curl -H "Origin: http://f62d1abfa8e8.ngrok.io/" \-H "Access-Control-Request-Method: POST" \ -H "Access-Control-Request-Headers: X-Requested-With" \-X OPTIONS --verbose \http://a4c30a66bdff.ngrok.io
+
 ### セキュリティ上の問題とは
 無条件でリクエストが送信できてしまうと、CSRF（クロスサイトリクエストフォージェリ）のリスクがあります。
 <br>
