@@ -7,12 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form><!--二つ目のappURL-->
-        <h2>フォームです</h2>
-        <input type="text" name="post-test">
-        <button onclick="requestApi()" id="js-btn" type="button">送信</button>
+    <div>
+        <button onclick="requestApi()" id="js-btn" type="button">XHRシンプル送信</button>
+        <button onclick="requestPreFlightApi()" id="js-btn-preflight" type="button">XHRプレフライト送信</button>
+    </div>
+        
 
-    </form>
     
 
     <script>
@@ -21,11 +21,40 @@
             //btn.click
             console.log(btn);
             let xhr = new XMLHttpRequest();
-            xhr.open('POST','https://cdaf6b717a94.ngrok.io');
-            xhr.send();
+            xhr.open('POST','http://60144f8a5e71.ngrok.io');
+            //xhr.setRequestHeader('origin','http://1129b7279090.ngrok.io');//自分のオリジンはこれです！と申告をする // Originでは
 
+            
+            xhr.onload = function(){
+                if (xhr.status === 200) {
+                    console.log("simple requestが成功")
+                    console.log(xhr.response);
+                }
+            }
+            xhr.send();
+        }
+
+        function requestPreFlightApi(){
+            let btn = document.getElementById('js-btn-preflight');
+            //btn.click
+            console.log(btn);
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST','http://60144f8a5e71.ngrok.io');
+            xhr.setRequestHeader( 'content-type', 'application/json' );//この指定をすることでプリフライトになる
+             //xhr.setRequestHeader( 'content-type', 'application/x-www-form-urlencoded;charset=UTF-8' );//この指定ではプリフライトにならない
+            
+            xhr.onload = function(){
+                if (xhr.status === 200) {
+                    console.log("prefligh requestが成功")
+                    console.log(xhr.response);
+                        
+                }
+            }
+            
+            xhr.send("preflight","頼む");
 
         }
+
        
     </script>
 </body>

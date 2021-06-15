@@ -12,10 +12,11 @@ simple requestとpreflight requestがあります。<br>
 preflight requestは、文字通りフライト（通信）の前に、「今からこういうリクエストを送るが良いか？」と、確認のリクエストを送る処理です。
 プリフライトリクエストの例です。<br>
 「https://foo.bar.org　というオリジンで、DELETEのリクエストを送ります。」と事前に宣言しています。
+通常 post : 送信先などが送信先として検証ツールで表示されますが、プリフライトリクエストの通信の場合は options : 送信先となります。
 
 ```
-OPTIONS /resource/foo
-Access-Control-Request-Method: DELETE
+OPTIONS /resource/foo　（送信先です。）
+Access-Control-Request-Method: DELETE　（メソッドの種類です。）
 Access-Control-Request-Headers: origin, x-requested-with
 Origin: https://foo.bar.org
 ```
@@ -50,10 +51,10 @@ inner.company.com がAccess-Control-Allow-Origin: * をしていると、スム�
 基本的に重要な情報を持っているサイトへのアクセスは、Access-Control-Allow-Originで信頼できるURLからのアクセスのみ許可するべきです。
 
 ## simple requestの条件は
-以下の全ての条件を満たすリクエストは、smple requestになります。<br>
+以下の全ての条件を満たすリクエストは、simple requestになります。<br>
 
-・GET、HEAD、POSTのいずれかの<br>
-・ユーザーエージェントによって自動的に設定されたヘッダー以外の、手動で設定できるヘッダーは、 以下のヘッダーのみであること<br>
+・GET、HEAD、POSTのいずれかのメソッドであること<br>
+・（ユーザーエージェントによって自動的に設定されたヘッダー以外の）手動で設定できるヘッダーは、 以下のヘッダーのみであること<br>
 
 ・Accept / Accept-Language / Content-Language /Content-Type (Content-Typeは下記の要件を満たすもの)<br>
 application/x-www-form-urlencoded<br>
@@ -65,7 +66,9 @@ text/plain<br>
 ## サーバからのレスポンスのAccess-Control-Allow-Originヘッダーに、リクエスト送信元のオリジンが含まれない場合
 ブラウザ側にはCORSセキュリティ上の規則によりブロックされたことがコンソール上に通知されます。
 
-##XMLHttpRequestでクロスオリジンリクエストを行う際、クッキーを含むためにはwithCredentialsの設定が必要です。
+
+## XMLHttpRequestを使ってクロスオリジンリクエストを発行する際、デフォルトの挙動だとリクエストにクッキーが含まれません。クッキー情報を含むためには、何をする必要があるでしょうか？
+クッキーを含むためにはwithCredentialsの設定が必要です。具体的には下記の設定です。
 
 ```
 var xhr = new XMLHttpRequest();

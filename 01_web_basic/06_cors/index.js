@@ -1,11 +1,11 @@
 
 const express = require('express');
+
 const app1 = express();
 const port1 = 3001;
 app1.use(express.static('public1'));
 
 app1.get('/',(req,res) => {
-    //res.send('こんにちは1');
     
     
 })
@@ -19,18 +19,30 @@ app1.listen(port1,() => {
 
 const app2 = express();
 const port2 = 3002;
-//app2.use(express.static('public2'));
+const cors = require('cors')
 
-app2.post('/',(req,res) => {
-    res.header('Access-Control-Allow-Origin','http://2f92c6295f34.ngrok.io');
+const corsOptions = {
+    origin: 'http://606e518443da.ngrok.io',
+    optionsSuccessStatus: 200 
+  }
+
+app2.post('/',cors(corsOptions),(req,res) => {
+    //res.header('Access-Control-Allow-Origin',"http://606e518443da.ngrok.io");
+    
     res.header('Access-Control-Allow-Methods', 'POST');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type'); //application/json
     res.json({
         message:"これはapp2のapiです。"
     });
-
-
 })
+
+/*
+app2.options('*', function (req, res) {
+    res.sendStatus(200);
+  });
+  */
+
+
 app2.listen(port2,() => {
     console.log(`app2 listening at http://localhost:${port2}`);
 })
