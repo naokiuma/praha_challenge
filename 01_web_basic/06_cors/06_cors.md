@@ -117,4 +117,6 @@ curl  -H "Origin: http://example.com" -H "Access-Control-Request-Method: POST"  
 
 でも、結果は同様に、1度の通信で対象のサーバーのデータを取得できました。（2つの違いは送信元のオリジンの申告を、プリフライトの際に許可されるURL、そうではないURLで変えた点です。）<br>
 つまりプリフライトリクエストは実施されなかった状態です。<br>
-おそらくですが、「　https://developer.mozilla.org/ja/docs/Glossary/Preflight_request　」によるとプリフライトリクエストは「ブラウザが発行する」物のため、curlからのリクエストではcorsの制約が実施されなかったのではないかと思われます。
+おそらくですが、
+https://developer.mozilla.org/ja/docs/Glossary/Preflight_request
+によるとプリフライトリクエストは「ブラウザが発行する」物のため、curlからのリクエストではcorsの制約が実施されなかったのではないかと思われます。
