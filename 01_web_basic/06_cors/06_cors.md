@@ -106,13 +106,13 @@ index.js・・・この中でexpressで2サーバーを起動。ngrokでそれ�
 
 
 ```
-curl  -H "Origin: http://de9c6666b195.ngrok.io" -H "Access-Control-Request-Method: POST"  -H "Access-Control-Request-Headers: Content-Type" -H "Content-Type: application/json" -d '{"Name":"sensuikan1973", "Age":"100"}' http://9685bbb6720e.ngrok.io --verbose
+curl  -H "Origin: http://de9c6666b195.ngrok.io" -H "Access-Control-Request-Method: POST"  -H "Access-Control-Request-Headers: Content-Type" -H "Content-Type: application/json" -d '{"Name":"hoge"}' http://9685bbb6720e.ngrok.io --verbose
 ```
 
 
 でも、
 ```
-curl  -H "Origin: http://example.com" -H "Access-Control-Request-Method: POST"  -H "Access-Control-Request-Headers: Content-Type" -H "Content-Type: application/json" -d '{"Name":"sensuikan1973", "Age":"100"}' http://9685bbb6720e.ngrok.io --verbose   
+curl  -H "Origin: http://example.com" -H "Access-Control-Request-Method: POST"  -H "Access-Control-Request-Headers: Content-Type" -H "Content-Type: application/json" -d '{"Name":"hoge", "Age"}' http://9685bbb6720e.ngrok.io --verbose   
 ```
 
 でも、結果は同様に、1度の通信で対象のサーバーのデータを取得できました。（2つの違いは送信元のオリジンの申告を、プリフライトの際に許可されるURL、そうではないURLで変えた点です。）<br>
