@@ -33,9 +33,7 @@ Cache-Control: must-revalidate<br>
 キャッシュデータが現在も有効かどうか、必ずサーバーに問い合わせる。<br>
 
 Cache-Control "max-age=秒数" 例：86400など（この場合は1日）<br>
-→ Expires "ここに期限の日時"<br>
 ブラウザに指定の秒数キャッシュさせます。
-
 
 cache-control: private<br>
 クライアント（ブラウザ）のみがキャッシュできるようにする
@@ -50,10 +48,11 @@ Cache-Controlの max-age と両方記載がある場合は、Cache-Control の�
 ## Last-Modified
 リソースの最終更新日を表します。
 ブラウザがキャッシュしているファイルの最終更新日をサーバーに知らせ、サーバー側の最終更新日と一致していればキャッシュを使い、そうでなければ改めてファイルをダウンロードします。
+E-tagより精度が低いです。
 
 ## ETag
 各リソースに付与される識別子です。Last-Modifiedと同様にブラウザのキャッシュの有効性を識別子で判定します。<br>
-Last-Modified と ETag の両方がある場合は、ETag の検証結果が優先されます。
+Last-Modifiedより精度は高く、Last-Modified と ETag の両方がある場合は、ETag の検証結果が優先されます。
 
 # 4:キャッシュサイズについて
 容量の上限を超えると、参照すべきデータを大量に保持していることで、毎回表示しようとしているサイトに一致するデータを見つけようとするため、<br>
@@ -76,13 +75,31 @@ Last-Modified と ETag の両方がある場合は、ETag の検証結果が優�
 
 
 
+# 7 実例
 ## [◼️mozillaのキャッシュの説明ページ](./キャッシュ1.png)
 https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Cache-Control
 
 ## [◼️キャッシュについて説明しているページ](./キャッシュ2.png)
 https://webtan.impress.co.jp/g/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5
 
-<br>
+## [◼️任天堂ホームページの画像](./キャッシュ3.png)
+https://www.nintendo.co.jp/top/img/switch_marioGolf_thumb.jpg
+<br>なお、ページそのもの(https://www.nintendo.co.jp)はキャッシュの設定はされていません。画像のみの指定でした。
+
+
+## [使われていないケース例](./noキャッシュ.png)
 https://www.amazon.co.jp/
 
-## [使われていないケース](./noキャッシュ.png)
+
+# キャッシュを返すサーバー作成
+
+index.jsで記述。
+エンドポイント「'/'」でキャッシュありのページ表示。
+エンドポイント「'/no_cache」で文字通りキャッシュなしのページを表示。
+
+結果は以下
+
+[キャッシュあり](./result/use_cache.png)
+[キャッシュなし](./result/no_cache.png)
+
+
