@@ -2,6 +2,27 @@ import { NameApiService } from "./nameApiService";
 import { DatabaseMock } from "./util";
 
 
+//??
+export const somePromise = (isSuccess: string) => {
+  return new Promise((resolve, reject) => {
+    const err = new Error('error');
+    const data = '成功しました';
+    if(isSuccess == "success"){
+      resolve(data);
+    }else{
+      reject(err);
+    }
+  });
+};
+
+export const greething = (text: string): string => {
+  return text + '、こんにちは';
+};
+
+
+
+
+
 // 関数の仮引数にも受け入れる型を定義。
 // {}の前にあるstringは関数の返す値の型を定義している。
 
@@ -13,11 +34,19 @@ export const sumOfArray = (numbers: number[]): number => {
   return numbers.reduce((a: number, b: number): number => a + b);
 };
 
+//promiseを返すということ。デフォルト
 export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
   return new Promise((resolve): void => {
     resolve(sumOfArray(numbers));
   });
 };
+
+//こういうこと？
+// export const asyncSumOfArray = () => {
+//   return new Promise((resolve) => {
+//     resolve(sumOfArray);
+//   });
+// };
 
 export const asyncSumOfArraySometimesZero = (
   numbers: number[]
