@@ -2,7 +2,8 @@ import { NameApiService } from "./nameApiService";
 import { DatabaseMock } from "./util";
 
 
-//??
+
+
 export const somePromise = (isSuccess: string) => {
   return new Promise((resolve, reject) => {
     const err = new Error('error');
@@ -18,6 +19,9 @@ export const somePromise = (isSuccess: string) => {
 export const greething = (text: string): string => {
   return text + '、こんにちは';
 };
+
+
+
 
 
 
@@ -41,19 +45,13 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
   });
 };
 
-//こういうこと？
-// export const asyncSumOfArray = () => {
-//   return new Promise((resolve) => {
-//     resolve(sumOfArray);
-//   });
-// };
 
-export const asyncSumOfArraySometimesZero = (
-  numbers: number[]
-): Promise<number> => {
+
+export const asyncSumOfArraySometimesZero = (numbers: number[]): Promise<number> => {
   return new Promise((resolve): void => {
     try {
-      const database = new DatabaseMock(); // fixme: この関数をテストするには、DatabaseMockの使い方を変える必要がありそう！ヒント：依存性の注入
+      const database = new DatabaseMock(); 
+      // fixme: この関数をテストするには、DatabaseMockの使い方を変える必要がありそう！ヒント：依存性の注入
       database.save(numbers);
       resolve(sumOfArray(numbers));
     } catch (error) {
