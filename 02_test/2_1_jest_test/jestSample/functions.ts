@@ -6,7 +6,7 @@ import { DatabaseMock } from "./util";
 
 export const somePromise = (isSuccess: string) => {
   return new Promise((resolve, reject) => {
-    const err = new Error('error');
+    const err = 'error';
     const data = '成功しました';
     if(isSuccess == "success"){
       resolve(data);
@@ -15,6 +15,8 @@ export const somePromise = (isSuccess: string) => {
     }
   });
 };
+
+
 
 export const greething = (text: string): string => {
   return text + '、こんにちは';
@@ -47,6 +49,9 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
 
 
 
+//memo
+
+//与える値がどうあれランダムで成功またはエラーになる関数のため、与えられた値で結果を返すようにする必要がある
 export const asyncSumOfArraySometimesZero = (numbers: number[]): Promise<number> => {
   return new Promise((resolve): void => {
     try {

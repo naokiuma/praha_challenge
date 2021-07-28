@@ -24,16 +24,23 @@ test('test2',() => {
     })
 })
 
-
-
-
-
-test('test3',() => {
-    return functions.somePromise('失敗だあ！').then((data:string) => {
-        return expect(Promise.reject(new Error('error'))).rejects.toThrow('error');
-    })
+test('test2.5',() => {
+        return expect(functions.somePromise('success')).resolves.toBe('成功しました');  
+   
 })
 
+
+//上手くいかぬ
+// test('test3',() => {
+//     return functions.somePromise('失敗だあ！').then((data:string) => {
+//         return expect(Promise.reject(new Error('error'))).rejects.toThrow('error');
+//     })
+// })
+//これで上手くいくのか
+test('test3',() => {
+    return expect(functions.somePromise('失敗だあ！')).rejects.toMatch('error');
+    
+})
 
 
 test('greething_test',() => {
@@ -73,6 +80,19 @@ test( 'test_asyncSumOfArray', () => {
     return functions.asyncSumOfArray([2,4]).then((data:number) => {
         return expect(Promise.resolve(data)).resolves.toBe(6);
     })
+})
+
+//問題3/成功ケース上手くいった
+test('test_asyncSumOfArraySometimesZeroResolve',() => {
+    return expect(functions.asyncSumOfArraySometimesZero([3,5])).resolves.toBe(8);
+
+})
+
+//問題3/失敗ケース上手くいった
+
+test('test_asyncSumOfArraySometimesZeroReject',() => {
+    return expect(functions.asyncSumOfArraySometimesZero([3,5,0])).resolves.toBe(0);
+
 })
 
 
