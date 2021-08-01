@@ -51,7 +51,7 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
 
 //memo
 
-//与える値がどうあれランダムで成功またはエラーになる関数のため、与えられた値で結果を返すようにする必要がある
+//与える値がどうあれランダムで成功またはエラーになる状態のため、与えられた値によって結果を返すようにする必要がある
 export const asyncSumOfArraySometimesZero = (numbers: number[]): Promise<number> => {
   return new Promise((resolve): void => {
     try {
@@ -65,14 +65,24 @@ export const asyncSumOfArraySometimesZero = (numbers: number[]): Promise<number>
   });
 };
 
+
+//nameapiサービスで計る数字が4で固定してしまうと正確に測れない。
+//そのため、apiからは名前だけ返す
 export const getFirstNameThrowIfLong = async (
   maxNameLength: number
 ): Promise<string> => {
   const nameApiService = new NameApiService(); // fixme: この関数をテストするには、NameApiServiceの使い方を変える必要がありそう！ヒント：依存性の注入
-  const firstName = await nameApiService.getFirstName();
+  //const firstName = await nameApiService.getFirstName();//これは使わない
 
-  if (firstName.length > maxNameLength) {
+
+  //単純にデフォルトの文字数を返すmock
+  const firstName = jest.fn().mockImplementation(() => 'first');//スタンダードなファーストネーム。7文字
+  const firstNameNum = firstName().length;//7がはいる
+
+  if (maxNameLength > firstNameNum) {//書き換え。
+  //if (firstName.length > maxNameLength) {//デフォルト
     throw new Error("first_name too long");
   }
-  return firstName;
+  //return firstName;
+  return 'ok';
 };

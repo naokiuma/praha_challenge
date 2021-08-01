@@ -6,7 +6,8 @@ export class DatabaseMock {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   //public save(_: number[]): void {
   public save(num: number[]): void {
-    // memo: 課題のために、あえて時々saveが失敗するようにしているが、これだとテストの質がみたされないので
+    // memo: 課題のために、あえて時々saveが失敗するようにしているが、これだとテストの結果が不安定になるので
+    // 配列の中に0以下が入ったらエラーになるようにした
     //if (getRandomInt(10) < 2) {
 
     let result  = num.filter(element => element < 1);

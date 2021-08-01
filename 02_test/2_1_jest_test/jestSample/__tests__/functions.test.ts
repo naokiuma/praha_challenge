@@ -82,19 +82,28 @@ test( 'test_asyncSumOfArray', () => {
     })
 })
 
-//問題3/成功ケース上手くいった
+//問題3/成功ケース
 test('test_asyncSumOfArraySometimesZeroResolve',() => {
     return expect(functions.asyncSumOfArraySometimesZero([3,5])).resolves.toBe(8);
 
 })
 
-//問題3/失敗ケース上手くいった
+//問題3/失敗ケース
 
 test('test_asyncSumOfArraySometimesZeroReject',() => {
     return expect(functions.asyncSumOfArraySometimesZero([3,5,0])).resolves.toBe(0);
 
 })
 
+
+//問題4 
+test('test_getFirstNameThrowIfLong',() => {
+    return expect(functions.getFirstNameThrowIfLong(5)).resolves.toBe('ok');
+})
+
+test('test_getFirstNameThrowIfLong',() => {
+        return expect(functions.getFirstNameThrowIfLong(8)).rejects.toStrictEqual(new Error('first_name too long'));
+     })
 
 
 
