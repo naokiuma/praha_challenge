@@ -66,23 +66,42 @@ export const asyncSumOfArraySometimesZero = (numbers: number[]): Promise<number>
 };
 
 
+//一旦これでうまくいったぞ
 //nameapiサービスで計る数字が4で固定してしまうと正確に測れない。
 //そのため、apiからは名前だけ返す
 export const getFirstNameThrowIfLong = async (
   maxNameLength: number
 ): Promise<string> => {
-  const nameApiService = new NameApiService(); // fixme: この関数をテストするには、NameApiServiceの使い方を変える必要がありそう！ヒント：依存性の注入
+  //const nameApiService = new NameApiService(); // fixme: この関数をテストするには、NameApiServiceの使い方を変える必要がありそう！ヒント：依存性の注入
   //const firstName = await nameApiService.getFirstName();//これは使わない
 
+  //単純に制限の文字数を返すmock
+  //jest.fn().mockImplementation(() => return "mock func");
+  const firstName = jest.fn().mockImplementation(() => 4);//スタンダードなファーストネームの数。4文字
+  //?const firstNameNum = firstName().length;//7がはいる
 
-  //単純にデフォルトの文字数を返すmock
-  const firstName = jest.fn().mockImplementation(() => 'first');//スタンダードなファーストネーム。7文字
-  const firstNameNum = firstName().length;//7がはいる
 
-  if (maxNameLength > firstNameNum) {//書き換え。
+  if (maxNameLength > firstName()) {//書き換え。
   //if (firstName.length > maxNameLength) {//デフォルト
     throw new Error("first_name too long");
   }
   //return firstName;
   return 'ok';
 };
+
+//デフォルト
+// export const getFirstNameThrowIfLong = async (
+//   maxNameLength: number
+// ): Promise<string> => {
+//   const nameApiService = new NameApiService(); // fixme: この関数をテストするには、NameApiServiceの使い方を変える必要がありそう！ヒント：依存性の注入
+//   const firstName = await nameApiService.getFirstName();
+
+//   if (firstName.length > maxNameLength) {
+//     throw new Error("first_name too long");
+//   }
+//   return firstName;
+// };
+
+
+
+

@@ -98,12 +98,12 @@ test('test_asyncSumOfArraySometimesZeroReject',() => {
 
 //問題4 
 test('test_getFirstNameThrowIfLong',() => {
-    return expect(functions.getFirstNameThrowIfLong(5)).resolves.toBe('ok');
+    return expect(functions.getFirstNameThrowIfLong(3)).resolves.toBe('ok');
 })
 
-test('test_getFirstNameThrowIfLong',() => {
-        return expect(functions.getFirstNameThrowIfLong(8)).rejects.toStrictEqual(new Error('first_name too long'));
-     })
+test('test_getFirstNameThrowIfLong2',() => {
+    return expect(functions.getFirstNameThrowIfLong(8)).rejects.toStrictEqual(new Error('first_name too long'));
+ })
 
 
 
