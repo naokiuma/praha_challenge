@@ -1,6 +1,10 @@
 // todo: ここに単体テストを書いてみましょう！
+
+import { NameApiService } from "../nameApiService";
+
 //import { somePromise } from "../functions";
 const functions = require('../functions.ts');
+const Nameapi = require('../nameApiService.ts');
 
 
 
@@ -14,7 +18,7 @@ const functions = require('../functions.ts');
 test('test' , () => {
     return functions.somePromise('success').then((data:string) => {
         expect(data).toBe('成功しました');//ここでイコールになっているか？
-    })
+    }) 
 })
 
 //resolved、rejectedでも書いてみる
@@ -105,6 +109,14 @@ test('test_getFirstNameThrowIfLong2',() => {
     return expect(functions.getFirstNameThrowIfLong(8)).rejects.toStrictEqual(new Error('first_name too long'));
  })
 
+
+ //nameapiのテスト
+
+ test('test_nameApiTest',() => {
+     let NameApi = new NameApiService(10);
+     return expect(NameApi.getFirstName()).rejects.toStrictEqual(new Error('firstName is too long!'));
+
+ })
 
 
 
