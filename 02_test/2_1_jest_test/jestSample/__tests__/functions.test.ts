@@ -112,7 +112,14 @@ test('test_getFirstNameThrowIfLong2',() => {
 
  //nameapiのテスト
 
- test('test_nameApiTest',() => {
+ test('test_nameApiTest1',() => {
+    let NameApi = new NameApiService(5);
+    return expect(NameApi.getFirstName()).resolves.toBe('ok');
+
+})
+
+
+ test('test_nameApiTest2',() => {
      let NameApi = new NameApiService(10);
      return expect(NameApi.getFirstName()).rejects.toStrictEqual(new Error('firstName is too long!'));
 
