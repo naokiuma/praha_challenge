@@ -73,11 +73,6 @@ test('test_sumOfArray_2',() => {
     expect(functions.sumOfArray([1,1])).toBe(2);
 })
 
-//空の配列は渡せない
-// test('test_sumOfArray_3',() => {
-//     expect(functions.sumOfArray([])).toBe();
-// })
-
 
 //問題2
 test( 'test_asyncSumOfArray', () => {
@@ -95,15 +90,45 @@ test('test_asyncSumOfArraySometimesZeroResolve',() => {
 //問題3/失敗ケース
 
 test('test_asyncSumOfArraySometimesZeroReject',() => {
-    return expect(functions.asyncSumOfArraySometimesZero([3,5,0])).resolves.toBe(0);
+    return expect(functions.asyncSumOfArraySometimesZero([3,5,0])).resolves.toBe(8);
 
 })
+
+
+// importするモジュールを変数に割り当てる
+
+describe('getFirstNameThrowIfLongのモック化テスト', () => {
+    test('モック化できているかその１', () => {
+        //クラス全体をもmock化
+        //jest.mock('../nameApiService');//これは不要では？
+        //const NameApiMock = NameApiService as jest.Mock;
+
+        const NameApiMock = jest.fn();//mockを作成
+        //mockImplementationOnce()で理想的なクラスを実装
+        NameApiMock.mockImplementationOnce(() => {
+            return {
+                getmaxNameLength:(): number => {
+                    return 4;
+                }
+            };
+        });
+        //インスタンス
+        const TestNameApi = new NameApiMock;
+        //const mockMaxLength = TestName.getmaxNameLength();
+        return expect(functions.getFirstNameThrowIfLong(3,TestNameApi)).resolves.toBe('ok');
+    });
+    // test('モック化できているかその2', () => {
+    //     const NameApiMock = jest.fn().mockReturnValueOnce('4');
+    //     return expect(functions.getFirstNameThrowIfLong(3,NameApiMock)).resolves.toBe('ok');
+    // });
+});
+
 
 
 //問題4 
-test('test_getFirstNameThrowIfLong',() => {
-    return expect(functions.getFirstNameThrowIfLong(3)).resolves.toBe('ok');
-})
+// test('test_getFirstNameThrowIfLong',() => {
+//     return expect(functions.getFirstNameThrowIfLong(3)).resolves.toBe('ok');
+// })
 
 test('test_getFirstNameThrowIfLong2',() => {
     return expect(functions.getFirstNameThrowIfLong(8)).rejects.toStrictEqual(new Error('first_name too long'));
@@ -113,17 +138,18 @@ test('test_getFirstNameThrowIfLong2',() => {
  //nameapiのテスト
 
  test('test_nameApiTest1',() => {
-    let NameApi = new NameApiService(5);
-    return expect(NameApi.getFirstName()).resolves.toBe('ok');
+    let firstName = jest.fn().mockImplementation(() => 5);//スタンダードなファーストネームの数。5文字を返す
+
+    return expect(firstName.mock.calls.length).resolves.toBe('ok');
 
 })
 
 
- test('test_nameApiTest2',() => {
-     let NameApi = new NameApiService(10);
-     return expect(NameApi.getFirstName()).rejects.toStrictEqual(new Error('firstName is too long!'));
+//  test('test_nameApiTest2',() => {
+//      let NameApi = new NameApiService(10);
+//      return expect(NameApi.getFirstName()).rejects.toStrictEqual(new Error('firstName is too long!'));
 
- })
+//  })
 
 
 
