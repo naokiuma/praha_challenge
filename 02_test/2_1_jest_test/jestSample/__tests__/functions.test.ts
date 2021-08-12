@@ -76,73 +76,88 @@ test('test_sumOfArray_2',() => {
 
 //問題2
 test( 'test_asyncSumOfArray', () => {
+
     return functions.asyncSumOfArray([2,4]).then((data:number) => {
         return expect(Promise.resolve(data)).resolves.toBe(6);
     })
 })
 
 //問題3/成功ケース
-test('test_asyncSumOfArraySometimesZeroResolve',() => {
-    return expect(functions.asyncSumOfArraySometimesZero([3,5])).resolves.toBe(8);
+test('asyncSumOfArraySometimesZeroのモックテスト',() => {
+    const DatabaseMockeSuccess = jest.fn();//モック化
+    const DatabaseMockeFaile = jest.fn();//モック化
+    //理想的なメソッドをmockに追加
+    //https://qiita.com/yuma-ito-bd/items/38c929eb5cccf7ce501e
+    DatabaseMockeSuccess.mockImplementationOnce( () => {
+        return {
+            save:() => {
+                return true;
+            }
+        };
+    })
+    DatabaseMockeFaile.mockImplementationOnce( () => {
+        return { //ここでリターンするのは元の関数と違うっぽい
+            save:() => {
+                throw new Error("fail!");
+            }
+        };
+    })
+
+    const DataBaseSaveSuccess = new DatabaseMockeSuccess;//mockをインスタンス化
+    const DataBaseSaveFaile = new DatabaseMockeFaile;//mockをインスタンス化
+    
+    expect(functions.asyncSumOfArraySometimesZero([3,5],DataBaseSaveSuccess)).resolves.toBe(8);
+    //expect(functions.asyncSumOfArraySometimesZero([3,5],DataBaseSaveFaile)).rejects.toMatch('error');
+    expect(functions.asyncSumOfArraySometimesZero([3,5],DataBaseSaveFaile)).rejects.toStrictEqual(0);
+
 
 })
 
-//問題3/失敗ケース
-
-test('test_asyncSumOfArraySometimesZeroReject',() => {
-    return expect(functions.asyncSumOfArraySometimesZero([3,5,0])).resolves.toBe(8);
-
-})
-
-
-// importするモジュールを変数に割り当てる
-
-describe('getFirstNameThrowIfLongのモック化テスト', () => {
-    test('モック化できているかその１', () => {
-        //クラス全体をもmock化
-        //jest.mock('../nameApiService');//これは不要では？
-        //const NameApiMock = NameApiService as jest.Mock;
-
-        const NameApiMock = jest.fn();//mockを作成
-        //mockImplementationOnce()で理想的なクラスを実装
-        NameApiMock.mockImplementationOnce(() => {
-            return {
-                getmaxNameLength:(): number => {
-                    return 4;
-                }
-            };
-        });
-        //インスタンス
-        const TestNameApi = new NameApiMock;
-        //const mockMaxLength = TestName.getmaxNameLength();
-        return expect(functions.getFirstNameThrowIfLong(3,TestNameApi)).resolves.toBe('ok');
-    });
-    // test('モック化できているかその2', () => {
-    //     const NameApiMock = jest.fn().mockReturnValueOnce('4');
-    //     return expect(functions.getFirstNameThrowIfLong(3,NameApiMock)).resolves.toBe('ok');
-    // });
-});
 
 
 
 //問題4 
+// importするモジュールを変数に割り当てる
+describe('getFirstNameThrowIfLongのモック化テスト', () => {
+    test('モック化できているか', () => {
+        //クラス全体をmock化
+        const NameApiMock = jest.fn();//mockを作成
+        //mockImplementationOnce()で理想的なクラスを実装
+        //mockに対して、毎回同じ値を返すようにする
+        NameApiMock.mockImplementationOnce(() => {
+            return {
+                getmaxNameLength:() => {
+                    return 4;
+                }
+            };
+        });
+    const TestNameApi = new NameApiMock;//インスタンス化
+    expect(functions.getFirstNameThrowIfLong(3,TestNameApi)).resolves.toBe('ok');
+    expect(functions.getFirstNameThrowIfLong(6,TestNameApi)).rejects.toStrictEqual(new Error('first_name too long'));
+
+    });
+});
+
+
+
+
 // test('test_getFirstNameThrowIfLong',() => {
 //     return expect(functions.getFirstNameThrowIfLong(3)).resolves.toBe('ok');
 // })
 
-test('test_getFirstNameThrowIfLong2',() => {
-    return expect(functions.getFirstNameThrowIfLong(8)).rejects.toStrictEqual(new Error('first_name too long'));
- })
+// test('test_getFirstNameThrowIfLong2',() => {
+//     return expect(functions.getFirstNameThrowIfLong(8)).rejects.toStrictEqual(new Error('first_name too long'));
+//  })
 
 
- //nameapiのテスト
+// //nameapiのテスト
 
- test('test_nameApiTest1',() => {
-    let firstName = jest.fn().mockImplementation(() => 5);//スタンダードなファーストネームの数。5文字を返す
+// test('test_nameApiTest1',() => {
+//     let firstName = jest.fn().mockImplementation(() => 5);//スタンダードなファーストネームの数。5文字を返す
 
-    return expect(firstName.mock.calls.length).resolves.toBe('ok');
+//     return expect(firstName.mock.calls.length).resolves.toBe('ok');
 
-})
+// })
 
 
 //  test('test_nameApiTest2',() => {

@@ -31,3 +31,6 @@ nameApiServiceでは結果で返ってくる名前がランダムな状態のた
 
 
 
+
+https://jestjs.io/ja/docs/mock-functions#%E3%83%A2%E3%83%83%E3%82%AF%E3%81%AE%E6%88%BB%E3%82%8A%E5%80%A4
+mock関数は、テスト中のコードにテスト用の値を注入するのにも利用できます。
