@@ -82,7 +82,8 @@ test( 'test_asyncSumOfArray', () => {
     })
 })
 
-//問題3/成功ケース
+
+//問題3
 test('asyncSumOfArraySometimesZeroのモックテスト',() => {
     const DatabaseMockeSuccess = jest.fn();//モック化
     const DatabaseMockeFaile = jest.fn();//モック化
@@ -96,7 +97,7 @@ test('asyncSumOfArraySometimesZeroのモックテスト',() => {
         };
     })
     DatabaseMockeFaile.mockImplementationOnce( () => {
-        return { //ここでリターンするのは元の関数と違うっぽい
+        return { 
             save:() => {
                 throw new Error("fail!");
             }
@@ -105,10 +106,9 @@ test('asyncSumOfArraySometimesZeroのモックテスト',() => {
 
     const DataBaseSaveSuccess = new DatabaseMockeSuccess;//mockをインスタンス化
     const DataBaseSaveFaile = new DatabaseMockeFaile;//mockをインスタンス化
-    
+    expect(functions.asyncSumOfArraySometimesZero([],DataBaseSaveSuccess)).resolves.toBe(0);
     expect(functions.asyncSumOfArraySometimesZero([3,5],DataBaseSaveSuccess)).resolves.toBe(8);
-    //expect(functions.asyncSumOfArraySometimesZero([3,5],DataBaseSaveFaile)).rejects.toMatch('error');
-    expect(functions.asyncSumOfArraySometimesZero([3,5],DataBaseSaveFaile)).rejects.toStrictEqual(0);
+    expect(functions.asyncSumOfArraySometimesZero([3,5],DataBaseSaveFaile)).resolves.toStrictEqual(0);
 
 
 })

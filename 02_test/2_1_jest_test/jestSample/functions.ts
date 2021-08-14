@@ -27,19 +27,18 @@ export const greething = (text: string): string => {
 
 //-------------------------------------------ここから問題
 //メモ
-// 関数の仮引数にも受け入れる型を定義。
-// {}の前にあるstringは関数の返す値の型を定義している。
-//デフォルト
-export const sumOfArray = (numbers: number[]): number => {
-  return numbers.reduce((a: number, b: number): number => a + b);
-};
 
+//デフォルト
 // export const sumOfArray = (numbers: number[]): number => {
-//   if(numbers.length === 0){//課題3-3に合わせ修正
-//     return 0;
-//   }
 //   return numbers.reduce((a: number, b: number): number => a + b);
 // };
+
+export const sumOfArray = (numbers: number[]): number => {
+  if(numbers.length === 0){//課題3-3に合わせ修正。配列が空の場合は0を返す
+    return 0;
+  }
+  return numbers.reduce((a: number, b: number): number => a + b);
+};
 
 
 //デフォルト
@@ -52,13 +51,14 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
 
 
 
-//memo
-//与える値がどうあれランダムで成功またはエラーになる状態のため、与えられた値によって結果を返すようにする必要がある
+//memo デフォルト
 // export const asyncSumOfArraySometimesZero = (
 //   numbers: number[]
-//   ): Promise<number> => {
+// ): Promise<number> => {
 //   return new Promise((resolve): void => {
 //     try {
+//       const database = new DatabaseMock(); // fixme: この関数をテストするには、DatabaseMockの使い方を変える必要がありそう！ヒント：依存性の注入
+//       database.save(numbers);
 //       resolve(sumOfArray(numbers));
 //     } catch (error) {
 //       resolve(0);
@@ -66,7 +66,6 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
 //   });
 // };
 
-//デフォルト
 export const asyncSumOfArraySometimesZero = (
   numbers: number[],
   database:any
