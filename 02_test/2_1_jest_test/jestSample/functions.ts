@@ -3,35 +3,12 @@ import { DatabaseMock } from "./util";
 
 
 
-//-------------------------------------------ここから練習
-
-export const somePromise = (isSuccess: string) => {
-  return new Promise((resolve, reject) => {
-    const err = 'error';
-    const data = '成功しました';
-    if(isSuccess == "success"){
-      resolve(data);
-    }else{
-      reject(err);
-    }
-  });
-};
 
 
 
-export const greething = (text: string): string => {
-  return text + '、こんにちは';
-};
+//-------------------------------------------
 
 
-
-//-------------------------------------------ここから問題
-//メモ
-
-//デフォルト
-// export const sumOfArray = (numbers: number[]): number => {
-//   return numbers.reduce((a: number, b: number): number => a + b);
-// };
 
 export const sumOfArray = (numbers: number[]): number => {
   if(numbers.length === 0){//課題3-3に合わせ修正。配列が空の場合は0を返す
@@ -40,8 +17,12 @@ export const sumOfArray = (numbers: number[]): number => {
   return numbers.reduce((a: number, b: number): number => a + b);
 };
 
+//sumOfArrayのデフォルト
+// export const sumOfArray = (numbers: number[]): number => {
+//   return numbers.reduce((a: number, b: number): number => a + b);
+// };
 
-//デフォルト
+
 export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
   return new Promise((resolve): void => {
     resolve(sumOfArray(numbers));
@@ -49,33 +30,16 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
 };
 
 
-
-
-//memo デフォルト
-// export const asyncSumOfArraySometimesZero = (
-//   numbers: number[]
-// ): Promise<number> => {
-//   return new Promise((resolve): void => {
-//     try {
-//       const database = new DatabaseMock(); // fixme: この関数をテストするには、DatabaseMockの使い方を変える必要がありそう！ヒント：依存性の注入
-//       database.save(numbers);
-//       resolve(sumOfArray(numbers));
-//     } catch (error) {
-//       resolve(0);
-//     }
-//   });
-// };
-
 export const asyncSumOfArraySometimesZero = (
   numbers: number[],
-  database:any
+  database:DatabaseMock
 ): Promise<number> => {
   
   return new Promise((resolve): void => {
     try {
       //const database = new DatabaseMock(); // fixme: この関数をテストするには、DatabaseMockの使い方を変える必要がありそう！ヒント：依存性の注入
       //database.save(numbers);
-      database.save();
+      database.save(numbers);
       resolve(sumOfArray(numbers));
     } catch (error) {
       resolve(0);
@@ -93,15 +57,15 @@ export const getFirstNameThrowIfLong = async (
 ): Promise<string> => {
 
    //const nameApiService = new NameApiService(); // fixme: この関数をテストするには、NameApiServiceの使い方を変える必要がありそう！ヒント：依存性の注入
-  const firstName = await nameApiService.getmaxNameLength();//max文字数を返す
+  const firstName = await nameApiService.getFirstName();//名前を返す
 
-  if (maxNameLength > firstName) {//書き換え。
+  if (firstName.length > maxNameLength) {//書き換え。
     throw new Error("first_name too long");
   }
-  return 'ok';
+  return firstName;
 };
 
-// //デフォルト
+// //デフォルトの関数は以下です
 // export const getFirstNameThrowIfLong = async (
 //   maxNameLength: number
 // ): Promise<string> => {
@@ -114,6 +78,43 @@ export const getFirstNameThrowIfLong = async (
 //   return firstName;
 // };
 
+
+
+
+//課題クイズ対象の関数------------------------
+
+
+//関数1
+export const checkApple = (
+  name:string
+):string => {
+
+  if(name === 'apple'){
+    return 'りんごです';
+  }else{
+    return 'りんごではありません'
+  }
+
+}
+
+//関数2
+export const greething = (text: string): string => {
+  return text + '、こんにちは';
+};
+
+
+//関数3
+export const somePromise = (isSuccess: string) => {
+  return new Promise((resolve, reject) => {
+    const err = 'error';
+    const data = '成功しました';
+    if(isSuccess == "success"){
+      resolve(data);
+    }else{
+      reject(err);
+    }
+  });
+};
 
 
 
