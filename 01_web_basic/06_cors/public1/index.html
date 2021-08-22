@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button onclick="requestApi()" id="js-btn" type="button">XHRシンプル送信</button>
+        <button onclick="requestPreFlightApi()" id="js-btn-preflight" type="button">XHRプレフライト送信</button>
+    </div>
+    <div>
+        <h2>リクエストのコンテンツタイプ</h2>
+        <p id="js-content"></p>
+
+    </div>
+    <div>
+        <h2>結果</h2>
+        <p id="js-result"></p>
+    </div>
+        
+
+    
+
+    <script>
+        function requestApi(){
+            let btn = document.getElementById('js-btn');
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST','http://9685bbb6720e.ngrok.io');
+            xhr.setRequestHeader( 'content-type', 'text/plain' );
+
+            let request = document.getElementById('js-content');
+            request.innerText = "コンテンツタイプは「text/plain」です。シンプルリクエストです";
+
+            xhr.onload = function(){
+                if (xhr.status === 200) {
+                    console.log("simple requestが成功")
+                    console.log(xhr.response);
+                    let result = document.getElementById('js-result');
+                    result.innerText = "simple requestが成功" + xhr.response;
+                }
+            }
+            xhr.send();
+        }
+
+
+
+        function requestPreFlightApi(){
+            let btn = document.getElementById('js-btn-preflight');
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST','http://9685bbb6720e.ngrok.io');
+            xhr.setRequestHeader( 'content-type', 'application/json' );//この指定をすることでプリフライトになる
+
+            let request = document.getElementById('js-content');
+            request.innerText = "コンテンツタイプは「application/json」です。プリフライトリクエストです。";
+
+            
+            xhr.onload = function(){
+                if (xhr.status === 200) {
+                    console.log("prefligh requestが成功")
+                    console.log(xhr.response);
+                    let result = document.getElementById('js-result');
+                    result.innerText = "prefligh requestが成功" + xhr.response;
+
+                        
+                }
+            }
+            
+            xhr.send();
+
+        }
+
+       
+    </script>
+</body>
+</html>
