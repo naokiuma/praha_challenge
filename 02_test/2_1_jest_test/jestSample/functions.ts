@@ -118,3 +118,31 @@ export const somePromise = (isSuccess: string) => {
 
 
 
+////課題クイズk-kbotさんの対象の関数------------------------
+
+
+import { ZipCloudApiService } from './zipCloudClient';
+
+export const greet = (yourName: string): string => {
+  return `Hello ${yourName}!!`;
+}
+
+export const isPrimeNumber = (number: number): boolean => {
+  if (number < 2) return false;
+  if (number === 2) return true;
+
+  for (let i = 2; i < number; i++) {
+    if (number % i === 0) return false;
+  }
+
+  return true;
+}
+
+export const whatPrefecture = (zipCode: string, zipCloudApiService: ZipCloudApiService): string => {
+  const prefecture = zipCloudApiService.getPrefecture(zipCode);
+  if (prefecture) {
+    return `〒${zipCode}は${prefecture}に存在します`;
+  } else {
+    return `〒${zipCode}は存在しません`;
+  }
+}

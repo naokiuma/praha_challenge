@@ -51,7 +51,7 @@ test('asyncSumOfArraySometimesZeroのモックテスト',() => {
 
     //どんな数字が入ろうがエラーを返す
     DatabaseMockeFaile.mockImplementationOnce( () => {
-        return { 
+        return {
             save:():Boolean => {
                 throw new Error("fail!");
             }
@@ -70,7 +70,7 @@ test('asyncSumOfArraySometimesZeroのモックテスト',() => {
 
 
 
-//問題4 
+//問題4
 // importするモジュールを変数に割り当てる
 describe('getFirstNameThrowIfLongのモック化テスト', () => {
     test('モック化できているか', () => {
@@ -95,7 +95,50 @@ describe('getFirstNameThrowIfLongのモック化テスト', () => {
 
 
 
+////課題クイズk-kbotさんの対象のテスト関数------------------------
 
+test( 'test_greet' , () => {
+    expect(functions.greet('tarou')).toBe("Hello tarou!!");
+})
+
+
+test( 'test_isPrimeNumber_0' , () => {
+    expect(functions.isPrimeNumber(0)).toBe(false);
+})
+
+test( 'test_isPrimeNumber_2' , () => {
+    expect(functions.isPrimeNumber(2)).toBe(true);
+})
+
+test( 'test_isPrimeNumber_3' , () => {
+    expect(functions.isPrimeNumber(0)).toBe(false);
+})
+
+test( 'test_isPrimeNumber_4' , () => {
+    expect(functions.isPrimeNumber(0)).toBe(false);
+})
+
+
+describe('zipcodeのモック化', () => {
+    test('郵便番号モック化', () => {
+        const zipService = jest.fn();//zipコードを返すapiをmock化
+        //mockImplementationOnce()で理想的なクラスを実装
+        zipService.mockImplementationOnce(() => {
+            return {
+                getPrefecture:(ZipNumber:number) => {
+                    if(ZipNumber == 1830052){
+                        return '東京都';
+                    }else if(ZipNumber == 1234567){
+                        return null;
+                    }
+                }
+            };
+        });
+    const zipServiceInstance = new zipService;//インスタンス化
+    expect(functions.whatPrefecture(1830052,zipServiceInstance)).toBe('〒1830052は東京都に存在します');
+    expect(functions.whatPrefecture(1234567,zipServiceInstance)).toBe('〒1234567は存在しません');
+    });
+});
 
 
 
