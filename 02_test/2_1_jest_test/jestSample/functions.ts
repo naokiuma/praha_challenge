@@ -9,13 +9,24 @@ import { DatabaseMock } from "./util";
 //-------------------------------------------
 
 
+//デフォルト
+// export const sumOfArray = (numbers: number[]): number => {
+//   if(numbers.length === 0){//課題3-3に合わせ修正。配列が空の場合は0を返す
+//     return 0;
+//   }
+//   return numbers.reduce((a: number, b: number): number => a + b);
+// };
 
 export const sumOfArray = (numbers: number[]): number => {
-  if(numbers.length === 0){//課題3-3に合わせ修正。配列が空の場合は0を返す
-    return 0;
-  }
-  return numbers.reduce((a: number, b: number): number => a + b);
+  return numbers.reduce((a: number, b: number,initialvalue): number => {
+    if(initialvalue === 0){
+      return 0;
+    }
+      return a + b
+  });
 };
+
+
 
 //sumOfArrayのデフォルト
 // export const sumOfArray = (numbers: number[]): number => {
@@ -98,7 +109,7 @@ export const checkApple = (
 }
 
 //関数2
-export const greething = (text: string): string => {
+export const greeting = (text: string): string => {
   return text + '、こんにちは';
 };
 
@@ -141,6 +152,8 @@ export const isPrimeNumber = (number: number): boolean => {
 export const whatPrefecture = (zipCode: string, zipCloudApiService: ZipCloudApiService): string => {
   const prefecture = zipCloudApiService.getPrefecture(zipCode);
   if (prefecture) {
+    // let type = typeof(zipCode);
+    // console.log(typeof(type));
     return `〒${zipCode}は${prefecture}に存在します`;
   } else {
     return `〒${zipCode}は存在しません`;

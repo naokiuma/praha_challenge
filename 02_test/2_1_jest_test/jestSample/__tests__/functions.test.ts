@@ -17,9 +17,9 @@ test('test_sumOfArray_2',() => {
     expect(functions.sumOfArray([1,1])).toBe(2);
 })
 
-test('test_sumOfArray_3',() => {
-    expect(functions.sumOfArray([])).toBe(0);
-})
+// test('test_sumOfArray_3',() => {
+//     expect(functions.sumOfArray([])).toBe(0);
+// })
 
 
 
@@ -85,9 +85,9 @@ describe('getFirstNameThrowIfLongのモック化テスト', () => {
                 }
             };
         });
-    const TestNameApi = new NameApiMock;//インスタンス化
-    expect(functions.getFirstNameThrowIfLong(8,TestNameApi)).resolves.toBe('kevin');
-    expect(functions.getFirstNameThrowIfLong(4,TestNameApi)).rejects.toStrictEqual(new Error('first_name too long'));
+        const TestNameApi = new NameApiMock;//インスタンス化
+        expect(functions.getFirstNameThrowIfLong(8,TestNameApi)).resolves.toBe('kevin');
+        expect(functions.getFirstNameThrowIfLong(4,TestNameApi)).rejects.toStrictEqual(new Error('first_name too long'));
 
     });
 });
@@ -102,7 +102,7 @@ test( 'test_greet' , () => {
 })
 
 
-test( 'test_isPrimeNumber_0' , () => {
+test( 'test_isPrimeNumber_1' , () => {
     expect(functions.isPrimeNumber(0)).toBe(false);
 })
 
@@ -110,13 +110,6 @@ test( 'test_isPrimeNumber_2' , () => {
     expect(functions.isPrimeNumber(2)).toBe(true);
 })
 
-test( 'test_isPrimeNumber_3' , () => {
-    expect(functions.isPrimeNumber(0)).toBe(false);
-})
-
-test( 'test_isPrimeNumber_4' , () => {
-    expect(functions.isPrimeNumber(0)).toBe(false);
-})
 
 
 describe('zipcodeのモック化', () => {
@@ -134,9 +127,9 @@ describe('zipcodeのモック化', () => {
                 }
             };
         });
-    const zipServiceInstance = new zipService;//インスタンス化
-    expect(functions.whatPrefecture(1830052,zipServiceInstance)).toBe('〒1830052は東京都に存在します');
-    expect(functions.whatPrefecture(1234567,zipServiceInstance)).toBe('〒1234567は存在しません');
+        const zipServiceInstance = new zipService;//インスタンス化
+        expect(functions.whatPrefecture("1830052",zipServiceInstance)).toBe('〒1830052は東京都に存在します');
+        expect(functions.whatPrefecture(1234567,zipServiceInstance)).toBe('〒1234567は存在しません');
     });
 });
 
