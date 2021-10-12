@@ -1,4 +1,5 @@
 01_web_basic/03_express/node_modules
 01_web_basic/06_cors/node_modules
 01_web_basic/07_cache/node_modules
+02_test/2_1_jest_test/node_modules
 *node_modules/
