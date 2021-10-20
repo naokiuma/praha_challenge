@@ -17,9 +17,9 @@ test('test_sumOfArray_2',() => {
     expect(functions.sumOfArray([1,1])).toBe(2);
 })
 
-// test('test_sumOfArray_3',() => {
-//     expect(functions.sumOfArray([])).toBe(0);
-// })
+test('test_sumOfArray_3',() => {
+    expect(functions.sumOfArray([])).toBe(0);
+})
 
 
 
