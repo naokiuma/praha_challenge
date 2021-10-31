@@ -22,23 +22,26 @@ https://tarosky.co.jp/tarog/4662
 ・バックエンドのデータはjestの対象外のため、snaopshot testでは拾えません。<br>
 ・出力の差分が大量な場合（1万行のコードを出力するテストの場合、違いがあってもわかりづらい）
 
-## snapshotで作られる情報について
-yarn test storybook.test.js　でstorybookの
-「__snapshots__ 」内の「storybook.test.js.snap」に、<br>
-### 「exports[ Storyshots XXXXXX」="htmlタグ"<br>
-というふうに、作ったstoryごとに作成されます。<br>
-storyの内容を変更すると、snapshotoを起動中であれば、差分を書き出してくれます。
-snapshotを起動しているターミナル上で「u」を押すと、変更部分がsnapshotoにも反映されます。
 
 # storybook snapshoto test構築手順
-https://storybook.js.org/docs/react/workflows/snapshot-testing　の引用<br>
+https://storybook.js.org/docs/react/workflows/snapshot-testing  の引用<br>
 
 1.addon-storyshotsをインストール<br>
-2.srcの中に　「storybook.test.js」を作成します。<br>
+2.src（test対象のコンポーネントがあるディレクトリ）の中に　「storybook.test.js」を作成します。中の記述は下記の通り。<br>
 import initStoryshots from '@storybook/addon-storyshots';<br>
 initStoryshots();<br>
 
 3.yarn test storybook.test.jsを実行
+
+## snapshotで作られる情報について
+yarn test storybook.test.js　でtest を実行すると、storybookの
+「__snapshots__ 」内の「storybook.test.js.snap」に、<br>
+### 「exports[ Storyshots XXXXXX（story名）」="htmlタグ"<br>
+というふうに、作ったstoryごとにsnapshotが作成されます。<br>
+storyの内容を変更すると、snapshotoを起動中であれば、差分を書き出してくれます。
+またsnapshotを起動しているターミナル上で「u」を押すと、変更部分がsnapshotにも反映されます。
+
+
 
 # クイズ
 storyに変更を行い、ターミナル上で出力されたtest結果のdiffを確認する場合、<br>
