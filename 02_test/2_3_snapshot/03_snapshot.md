@@ -38,7 +38,7 @@ yarn test storybook.test.js　でtest を実行すると、storybookの
 「__snapshots__ 」内の「storybook.test.js.snap」に、<br>
 ### 「exports[ Storyshots XXXXXX（story名）」="htmlタグ"<br>
 というふうに、作ったstoryごとにsnapshotが作成されます。<br>
-storyの内容を変更すると、snapshotoを起動中であれば、差分を書き出してくれます。
+storyの内容を変更すると、testを起動中であれば、差分を書き出してくれます。
 またsnapshotを起動しているターミナル上で「u」を押すと、変更部分がsnapshotにも反映されます。
 
 
@@ -55,4 +55,9 @@ component内にconsole.logを記述しているとそれらもtest内に出力�
 もっといい方法があれば知りたいです！w
 
 
-
+# 任意課題
+style-componentのテストを試してみました。<br>
+https://github.com/naokiuma/react_tutorial/blob/master/src/components/ticktacktoo/Square.js <br>
+の9~22行めで実施。（storybook上でカラーが変わることを確認。）<br>
+また、expect(tree).toHaveStyleRule('color', 'blue')　のテストを書くと、
+カラーの色を変えたときにエラーとなることを確認しました。
