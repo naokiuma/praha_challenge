@@ -18,10 +18,10 @@ import { DatabaseMock } from "./util";
 // };
 
 export const sumOfArray = (numbers: number[]): number => {
-  return numbers.reduce((a: number, b: number,initialvalue): number => {
-    if(initialvalue === 0){
-      return 0;
-    }
+  if(!numbers.length){
+    return 0;
+  }
+  return numbers.reduce((a: number, b: number,initialvalue): number => {    
       return a + b
   });
 };
